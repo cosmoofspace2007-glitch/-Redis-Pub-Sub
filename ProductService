@@ -1,0 +1,16 @@
+@Service
+public class ProductService {
+
+    @Autowired
+    private ProductRepository repository;
+
+    @Cacheable(value="products",key="#id")
+    public Product getProduct(Long id){
+
+        System.out.println("Load Database");
+
+        return repository.findById(id).orElse(null);
+
+    }
+
+}
