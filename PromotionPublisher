@@ -1,0 +1,15 @@
+@Service
+public class PromotionPublisher {
+
+    @Autowired
+    private RedisTemplate<String,Object> redisTemplate;
+
+    public void publish(Long productId){
+
+        redisTemplate.convertAndSend(
+                "promotion-updates",
+                productId);
+
+    }
+
+}
