@@ -1,0 +1,24 @@
+@Configuration
+public class RedisSubscriberConfig {
+
+    @Bean
+    RedisMessageListenerContainer container(
+
+            RedisConnectionFactory factory,
+
+            PromotionSubscriber subscriber){
+
+        RedisMessageListenerContainer container =
+                new RedisMessageListenerContainer();
+
+        container.setConnectionFactory(factory);
+
+        container.addMessageListener(
+                subscriber,
+                new PatternTopic("promotion-updates"));
+
+        return container;
+
+    }
+
+}
